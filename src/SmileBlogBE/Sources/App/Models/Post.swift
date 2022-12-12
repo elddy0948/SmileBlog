@@ -16,11 +16,11 @@ final class Post: Model {
   @Field(key: "writer")
   var writer: String
   
-  @Field(key: "createdAt")
-  var createdAt: Date
+  @Timestamp(key: "createdAt", on: .create)
+  var createdAt: Date?
   
-  @Field(key: "editedAt")
-  var editedAt: Date
+  @Timestamp(key: "editedAt", on: .update)
+  var editedAt: Date?
   
   init() {}
   
@@ -29,8 +29,8 @@ final class Post: Model {
     title: String,
     body: String,
     writer: String,
-    createdAt: Date = Date(),
-    editedAt: Date = Date()
+    createdAt: Date? = Date(),
+    editedAt: Date? = Date()
   ) {
     self.id = id
     self.title = title

@@ -6,8 +6,9 @@ struct CreatePost: Migration {
       .id()
       .field("title", .string, .required)
       .field("body", .string, .required)
-      .field("createdAt", .string, .required)
-      .field("editedAt", .string, .required)
+      .field("writer", .string, .required)
+      .field("createdAt", .time, .required)
+      .field("editedAt", .time, .required)
       .create()
   }
   

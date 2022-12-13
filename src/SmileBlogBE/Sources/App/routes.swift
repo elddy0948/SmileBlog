@@ -28,6 +28,18 @@ func routes(_ app: Application) throws {
   })
   
   //MARK: - Update
+  app.put("api", "posts", ":postID", use: { req -> EventLoopFuture<Post> in
+    let updatePost = try req.content.decode(Post.self)
+    let postID = req.parameters.get("postID").flatMap({ UUID($0) })
+    return Post.find(postID, on: req.db)
+      .unwrap(or: Abort(.notFound))
+      .flatMap({ post in
+        post.title = updatePost.title
+        post.body = updatePost.body
+        post.editedAt = Date()
+        return post.save(on: req.db).map({ post })
+      })
+  })
   
   //MARK: - Delete
 }

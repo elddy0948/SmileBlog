@@ -42,4 +42,12 @@ func routes(_ app: Application) throws {
   })
   
   //MARK: - Delete
+  app.delete("api", "posts", ":postID", use: { req -> EventLoopFuture<HTTPStatus> in
+    return Post.find(req.parameters.get("postID"), on: req.db)
+      .unwrap(or: Abort(.notFound))
+      .flatMap({ post in
+        post.delete(on: req.db)
+          .transform(to: .noContent)
+      })
+  })
 }

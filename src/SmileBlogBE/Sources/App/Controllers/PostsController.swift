@@ -4,7 +4,15 @@ import Fluent
 struct PostsController: RouteCollection {
   func boot(routes: RoutesBuilder) throws {
     let postsRoutes = routes.grouped("api", "posts")
+    
     postsRoutes.get(use: getAllHandler(_:))
+    postsRoutes.get(":postID", use: getHandler(_:))
+    
+    postsRoutes.post(use: createHandler(_:))
+    
+    postsRoutes.put(":postID", use: updateHandler(_:))
+    
+    postsRoutes.delete(":postID", use: deleteHandler(_:))
   }
   
   //MARK: - Create
@@ -51,5 +59,3 @@ struct PostsController: RouteCollection {
       })
   }
 }
-
-

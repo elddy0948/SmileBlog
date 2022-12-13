@@ -10,8 +10,24 @@ func routes(_ app: Application) throws {
     "Hello, world!"
   }
   
+  //MARK: - Create
   app.post("api", "posts", use: { req -> EventLoopFuture<Post> in
     let post = try req.content.decode(Post.self)
     return post.save(on: req.db).map({ post })
   })
+  
+  //MARK: - Retrieve
+  app.get("api", "posts", use: { req -> EventLoopFuture<[Post]> in
+    return Post.query(on: req.db).all()
+  })
+  
+  app.get("api", "posts", ":postID", use: { req -> EventLoopFuture<Post> in
+    let postID = req.parameters.get("postID").flatMap({ UUID($0) })
+    return Post.find(postID, on: req.db)
+      .unwrap(or: Abort(.notFound))
+  })
+  
+  //MARK: - Update
+  
+  //MARK: - Delete
 }

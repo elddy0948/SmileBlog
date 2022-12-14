@@ -17,7 +17,12 @@ struct PostsController: RouteCollection {
   
   //MARK: - Create
   func createHandler(_ req: Request) throws -> EventLoopFuture<Post> {
-    let post = try req.content.decode(Post.self)
+    let data = try req.content.decode(CreatePostData.self)
+    let post = Post(
+      title: data.title,
+      body: data.body,
+      writer: data.writer,
+      userID: data.userID)
     return post.save(on: req.db).map({ post })
   }
   
@@ -58,4 +63,13 @@ struct PostsController: RouteCollection {
           .transform(to: .noContent)
       })
   }
+}
+
+struct CreatePostData: Content {
+  let title: String
+  let body: String
+  let writer: String
+  let createdAt: Date?
+  let editedAt: Date?
+  let userID: UUID
 }

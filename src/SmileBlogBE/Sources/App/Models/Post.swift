@@ -22,6 +22,9 @@ final class Post: Model {
   @Timestamp(key: "editedAt", on: .update)
   var editedAt: Date?
   
+  @Parent(key: "userID")
+  var user: User
+  
   init() {}
   
   init(
@@ -30,7 +33,8 @@ final class Post: Model {
     body: String,
     writer: String,
     createdAt: Date? = Date(),
-    editedAt: Date? = Date()
+    editedAt: Date? = Date(),
+    userID: User.IDValue
   ) {
     self.id = id
     self.title = title
@@ -38,6 +42,7 @@ final class Post: Model {
     self.writer = writer
     self.createdAt = createdAt
     self.editedAt = editedAt
+    self.$user.id = userID
   }
 }
 

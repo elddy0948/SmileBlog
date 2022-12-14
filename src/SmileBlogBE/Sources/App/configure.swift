@@ -19,6 +19,7 @@ public func configure(_ app: Application) throws {
   app.views.use(.leaf)
   
   app.migrations.add(CreatePost())
+  app.migrations.add(CreateUser())
   app.logger.logLevel = Logger.Level.debug
   
   try app.autoMigrate().wait()

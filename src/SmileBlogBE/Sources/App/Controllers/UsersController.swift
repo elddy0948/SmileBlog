@@ -8,6 +8,8 @@ struct UsersController: RouteCollection {
     
     usersRoute.get(use: getAllHandler(_:))
     usersRoute.get(":userID", use: getHandler(_:))
+    
+    usersRoute.get(":userID", "posts", use: getPostsHandler(_:))
   }
   
   //MARK: - Create
@@ -25,5 +27,14 @@ struct UsersController: RouteCollection {
     let userID = req.parameters.get("userID").flatMap({ UUID($0) })
     return User.find(userID, on: req.db)
       .unwrap(or: Abort(.notFound))
+  }
+  
+  func getPostsHandler(_ req: Request) -> EventLoopFuture<[Post]> {
+    let userID = req.parameters.get("userID").flatMap({ UUID($0) })
+    return User.find(userID, on: req.db)
+      .unwrap(or: Abort(.notFound))
+      .flatMap({ user in
+        user.$posts.get(on: req.db)
+      })
   }
 }

@@ -9,7 +9,7 @@ struct CreatePost: Migration {
       .field("writer", .string, .required)
       .field("createdAt", .time, .required)
       .field("editedAt", .time, .required)
-      .field("userID", .uuid, .required)
+      .field("userID", .uuid, .required, .references("users", "id"))
       .create()
   }
   

@@ -13,6 +13,8 @@ struct PostsController: RouteCollection {
     postsRoutes.put(":postID", use: updateHandler(_:))
     
     postsRoutes.delete(":postID", use: deleteHandler(_:))
+    
+    postsRoutes.get(":postID", "user", use: getUserHandler(_:))
   }
   
   //MARK: - Create
@@ -62,6 +64,15 @@ struct PostsController: RouteCollection {
       .flatMap({ post in
         return post.delete(on: req.db)
           .transform(to: .noContent)
+      })
+  }
+  
+  func getUserHandler(_ req: Request) -> EventLoopFuture<User> {
+    let postID = req.parameters.get("postID").flatMap({ UUID($0) })
+    return Post.find(postID, on: req.db)
+      .unwrap(or: Abort(.notFound))
+      .flatMap({ post in
+        post.$user.get(on: req.db)
       })
   }
 }

@@ -39,7 +39,7 @@ struct PostsController: RouteCollection {
   
   //MARK: - Update
   func updateHandler(_ req: Request) throws -> EventLoopFuture<Post> {
-    let updatedPost = try req.content.decode(Post.self)
+    let updatedPost = try req.content.decode(CreatePostData.self)
     let postID = req.parameters.get("postID").flatMap({ UUID($0) })
     
     return Post.find(postID, on: req.db)
@@ -48,6 +48,7 @@ struct PostsController: RouteCollection {
         post.title = updatedPost.title
         post.body = updatedPost.body
         post.editedAt = Date()
+        post.$user.id = updatedPost.userID
         return post.save(on: req.db)
           .map({ post })
       })

@@ -74,4 +74,40 @@ final class UserTests: XCTestCase {
       XCTAssertEqual(receivedUser.id, user.id)
     })
   }
+  
+  func testGettingAUsersPostsWithAPI() throws {
+    let user = try User.create(on: app.db)
+    let postTitle = "First posting"
+    let postBody = "First post body here"
+    let postWriter = "HoLuck"
+    
+    let post1 = try Post.create(
+      title: postTitle,
+      body: postBody,
+      writer: postWriter,
+      createdAt: nil,
+      editedAt: nil,
+      user: user,
+      on: app.db
+    )
+    
+    _ = try Post.create(
+      title: "Hello",
+      body: "Hello body!",
+      writer: "helloMan",
+      createdAt: nil,
+      editedAt: nil,
+      user: user,
+      on: app.db
+    )
+    
+    try app.test(.GET, "\(usersURI)\(user.id!)/posts", afterResponse: { response in
+      let posts = try response.content.decode([Post].self)
+      XCTAssertEqual(posts.count, 2)
+      XCTAssertEqual(posts[0].id, post1.id)
+      XCTAssertEqual(posts[0].title, postTitle)
+      XCTAssertEqual(posts[0].body, postBody)
+      XCTAssertEqual(posts[0].writer, postWriter)
+    })
+  }
 }

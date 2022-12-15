@@ -36,4 +36,26 @@ final class UserTests: XCTestCase {
       XCTAssertEqual(users[0].id, user.id)
     })
   }
+  
+  func testUserCanBeSavedWithAPI() throws {
+    let user = User(name: usersName, username: usersUsername)
+    
+    try app.test(.POST, usersURI, beforeRequest: { req in
+      try req.content.encode(user)
+    }, afterResponse: { response in
+      let receivedUser = try response.content.decode(User.self)
+      XCTAssertEqual(receivedUser.name, user.name)
+      XCTAssertEqual(receivedUser.username, user.username)
+      XCTAssertNotNil(receivedUser.id)
+      
+      try app.test(.GET, usersURI, afterResponse: { secondResponse in
+        let users = try secondResponse.content.decode([User].self)
+        
+        XCTAssertEqual(users.count, 1)
+        XCTAssertEqual(users[0].name, usersName)
+        XCTAssertEqual(users[0].username, usersUsername)
+        XCTAssertEqual(users[0].id, receivedUser.id)
+      })
+    })
+  }
 }

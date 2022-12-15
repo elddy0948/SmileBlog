@@ -2,26 +2,28 @@
 import XCTVapor
 
 final class UserTests: XCTestCase {
+  
+  let usersName = "HoJoon"
+  let usersUsername = "HoLuck"
+  let usersURI = "/api/users/"
+  var app: Application!
+  
+  override func setUpWithError() throws {
+    app = try Application.testable()
+  }
+  
+  override func tearDownWithError() throws {
+    app.shutdown()
+  }
+  
   func testUsersCanBeRetrievedFromAPI() throws {
-    let expectedName = "HoJoon"
-    let expectedUsername = "HoLuck"
+    let user = try User.create(
+      name: usersName,
+      username: usersUsername,
+      on: app.db
+    )
     
-    let app = Application(.testing)
-    
-    defer { app.shutdown() }
-    
-    try configure(app)
-    
-    try app.autoRevert().wait()
-    try app.autoMigrate().wait()
-    
-    let user = User(name: expectedName, username: expectedUsername)
-    
-    try user.save(on: app.db).wait()
-    
-    try User(name: "Joon", username: "joons")
-      .save(on: app.db)
-      .wait()
+    _ = try User.create(on: app.db)
     
     try app.test(.GET, "api/users", afterResponse: { response in
       XCTAssertEqual(response.status, HTTPResponseStatus.ok)
@@ -29,8 +31,8 @@ final class UserTests: XCTestCase {
       let users = try response.content.decode([User].self)
       
       XCTAssertEqual(users.count, 2)
-      XCTAssertEqual(users[0].name, expectedName)
-      XCTAssertEqual(users[0].username, expectedUsername)
+      XCTAssertEqual(users[0].name, usersName)
+      XCTAssertEqual(users[0].username, usersUsername)
       XCTAssertEqual(users[0].id, user.id)
     })
   }

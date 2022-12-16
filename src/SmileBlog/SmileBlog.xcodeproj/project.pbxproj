@@ -58,7 +58,7 @@
 		B4B166992939D39600971309 /* SmileBlog */ = {
 			isa = PBXGroup;
 			children = (
-				B4FF615B294C355E003A2787 /* Models */,
+				B4FF6162294C47EB003A2787 /* Domain */,
 				B4B1669A2939D39600971309 /* AppDelegate.swift */,
 				B4B1669C2939D39600971309 /* SceneDelegate.swift */,
 				B4B1669E2939D39600971309 /* ViewController.swift */,
@@ -69,13 +69,21 @@
 			path = SmileBlog;
 			sourceTree = "<group>";
 		};
-		B4FF615B294C355E003A2787 /* Models */ = {
+		B4FF615B294C355E003A2787 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				B4FF615E294C36D4003A2787 /* User.swift */,
 				B4FF6160294C370D003A2787 /* Post.swift */,
 			);
-			path = Models;
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		B4FF6162294C47EB003A2787 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B4FF615B294C355E003A2787 /* Entities */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

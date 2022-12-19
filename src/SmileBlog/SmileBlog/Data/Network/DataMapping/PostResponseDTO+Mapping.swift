@@ -1,10 +1,3 @@
-//
-//  PostResponseDTO+Mapping.swift
-//  SmileBlog
-//
-//  Created by 김호준 on 2022/12/19.
-//
-
 import Foundation
 
 struct PostResponseDTO: Decodable {
@@ -14,7 +7,7 @@ struct PostResponseDTO: Decodable {
   let writer: String
   let createdAt: Date?
   let editedAt: Date?
-  let user: UserResponseDTO
+  let user: [String: UUID?]
 }
 
 extension PostResponseDTO {
@@ -26,7 +19,7 @@ extension PostResponseDTO {
       writer: self.writer,
       editedAt: self.editedAt,
       createdAt: self.createdAt,
-      user: self.user.toDomain()
+      user: self.user
     )
   }
 }

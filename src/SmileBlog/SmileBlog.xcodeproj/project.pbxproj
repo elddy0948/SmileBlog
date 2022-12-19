@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B42D9114295016AB009E51F3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D9113295016AB009E51F3 /* NetworkService.swift */; };
+		B42D911729501A39009E51F3 /* UserRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911629501A39009E51F3 /* UserRequestDTO+Mapping.swift */; };
+		B42D911929501B35009E51F3 /* UserResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */; };
+		B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */; };
 		B4B1669B2939D39600971309 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1669A2939D39600971309 /* AppDelegate.swift */; };
 		B4B1669D2939D39600971309 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1669C2939D39600971309 /* SceneDelegate.swift */; };
 		B4B1669F2939D39600971309 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1669E2939D39600971309 /* ViewController.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B42D9113295016AB009E51F3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		B42D911629501A39009E51F3 /* UserRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B4B166972939D39600971309 /* SmileBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B1669A2939D39600971309 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B1669C2939D39600971309 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +51,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B42D911129501655009E51F3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B42D911229501657009E51F3 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B42D911229501657009E51F3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B42D911529501A1C009E51F3 /* DataMapping */,
+				B42D9113295016AB009E51F3 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		B42D911529501A1C009E51F3 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				B42D911629501A39009E51F3 /* UserRequestDTO+Mapping.swift */,
+				B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */,
+				B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
 		B4B1668E2939D39600971309 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +97,7 @@
 		B4B166992939D39600971309 /* SmileBlog */ = {
 			isa = PBXGroup;
 			children = (
+				B42D911129501655009E51F3 /* Data */,
 				B4FF6162294C47EB003A2787 /* Domain */,
 				B4B1669A2939D39600971309 /* AppDelegate.swift */,
 				B4B1669C2939D39600971309 /* SceneDelegate.swift */,
@@ -188,7 +224,11 @@
 			files = (
 				B4FF615F294C36D4003A2787 /* User.swift in Sources */,
 				B4FF6168294C4903003A2787 /* UsersRepository.swift in Sources */,
+				B42D9114295016AB009E51F3 /* NetworkService.swift in Sources */,
+				B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */,
 				B4FF6165294C4879003A2787 /* UsersUseCase.swift in Sources */,
+				B42D911729501A39009E51F3 /* UserRequestDTO+Mapping.swift in Sources */,
+				B42D911929501B35009E51F3 /* UserResponseDTO+Mapping.swift in Sources */,
 				B4B1669F2939D39600971309 /* ViewController.swift in Sources */,
 				B4B1669B2939D39600971309 /* AppDelegate.swift in Sources */,
 				B4B1669D2939D39600971309 /* SceneDelegate.swift in Sources */,

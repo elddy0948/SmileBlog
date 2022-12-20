@@ -19,6 +19,7 @@
 		B4DC157C29517B2F00B8FFEB /* NetworkUsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC157B29517B2F00B8FFEB /* NetworkUsersRepository.swift */; };
 		B4DC15812951818500B8FFEB /* PostsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC15802951818500B8FFEB /* PostsUseCase.swift */; };
 		B4DC1583295181AA00B8FFEB /* PostsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1582295181AA00B8FFEB /* PostsRepository.swift */; };
+		B4DC1585295184EA00B8FFEB /* NetworkPostsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC1584295184EA00B8FFEB /* NetworkPostsRepository.swift */; };
 		B4FF615F294C36D4003A2787 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF615E294C36D4003A2787 /* User.swift */; };
 		B4FF6161294C370D003A2787 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF6160294C370D003A2787 /* Post.swift */; };
 		B4FF6165294C4879003A2787 /* UsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF6164294C4879003A2787 /* UsersUseCase.swift */; };
@@ -40,6 +41,7 @@
 		B4DC157B29517B2F00B8FFEB /* NetworkUsersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUsersRepository.swift; sourceTree = "<group>"; };
 		B4DC15802951818500B8FFEB /* PostsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsUseCase.swift; sourceTree = "<group>"; };
 		B4DC1582295181AA00B8FFEB /* PostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsRepository.swift; sourceTree = "<group>"; };
+		B4DC1584295184EA00B8FFEB /* NetworkPostsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPostsRepository.swift; sourceTree = "<group>"; };
 		B4FF615E294C36D4003A2787 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B4FF6160294C370D003A2787 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B4FF6164294C4879003A2787 /* UsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersUseCase.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				B4DC157B29517B2F00B8FFEB /* NetworkUsersRepository.swift */,
+				B4DC1584295184EA00B8FFEB /* NetworkPostsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				B4FF615F294C36D4003A2787 /* User.swift in Sources */,
 				B4FF6168294C4903003A2787 /* UsersRepository.swift in Sources */,
 				B4DC15812951818500B8FFEB /* PostsUseCase.swift in Sources */,
+				B4DC1585295184EA00B8FFEB /* NetworkPostsRepository.swift in Sources */,
 				B42D9114295016AB009E51F3 /* NetworkService.swift in Sources */,
 				B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */,
 				B4FF6165294C4879003A2787 /* UsersUseCase.swift in Sources */,

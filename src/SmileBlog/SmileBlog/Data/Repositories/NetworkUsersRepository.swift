@@ -14,7 +14,7 @@ final class NetworkUsersRepository: UsersRepository {
           completion(.success(user))
           return
         case .failure(let error):
-          print(error.localizedDescription)
+          completion(.failure(error))
           return
         }
       })
@@ -30,7 +30,7 @@ final class NetworkUsersRepository: UsersRepository {
           completion(.success(users))
           return
         case .failure(let error):
-          print(error.localizedDescription)
+          completion(.failure(error))
           return
         }
       })
@@ -46,7 +46,7 @@ final class NetworkUsersRepository: UsersRepository {
           completion(.success(posts))
           return
         case .failure(let error):
-          print(error.localizedDescription)
+          completion(.failure(error))
           return
         }
       })

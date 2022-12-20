@@ -1,58 +1,56 @@
 import Foundation
 
+public enum NetworkError: Error {
+  case notFound
+  case invalidURL
+  case invalidRequest
+  case invalidStatusCode
+  case invalidData
+  case failedDecoding
+}
+
 final class NetworkService {
-  static func fetchUser(with id: String, completion: @escaping(Result<UserResponseDTO, Error>) -> Void) {
-    let endPoint = "http://localhost:8080/api/users/\(id)"
-    let url = URL(string: endPoint)!
-    let request = URLRequest(url: url)
-    
-    URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-      if let error = error {
-        completion(.failure(error))
-        return
-      }
-      
-      guard let response = response as? HTTPURLResponse,
-            (200 ..< 300) ~= response.statusCode else {
-        return
-      }
-      
-      if let data = data {
-        do {
-          let user = try JSONDecoder().decode(UserResponseDTO.self, from: data)
-          completion(.success(user))
-        } catch let error {
-          completion(.failure(error))
-        }
-      }
-    }).resume()
-  }
+  static let baseURL = "http://localhost:8080"
   
-  static func fetchPost(with id: String, completion: @escaping (Result<PostResponseDTO, Error>) -> Void) {
-    let endPoint = "http://localhost:8080/api/posts/\(id)"
-    let url = URL(string: endPoint)!
+  static func fetch<T: Decodable>(
+    of type: T.Type = T.self,
+    endPoint: String,
+    completion: @escaping(Result<T, NetworkError>) -> Void
+  ) {
+    guard let url = URL(string: baseURL + endPoint) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+    
     let request = URLRequest(url: url)
     
-    URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-      if let error = error {
-        completion(.failure(error))
+    let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+      if let _ = error {
+        completion(.failure(.invalidRequest))
         return
       }
       
       guard let response = response as? HTTPURLResponse,
             (200 ..< 300) ~= response.statusCode else {
+        completion(.failure(.invalidStatusCode))
         return
       }
       
       if let data = data {
         do {
-          let post = try JSONDecoder().decode(PostResponseDTO.self, from: data)
-          completion(.success(post))
-        } catch let error {
-          completion(.failure(error))
+          let decodedData = try JSONDecoder().decode(T.self, from: data)
+          completion(.success(decodedData))
+          return
+        } catch {
+          completion(.failure(.failedDecoding))
+          return
         }
+      } else {
+        completion(.failure(.invalidData))
+        return
       }
-    }).resume()
+    })
     
+    task.resume()
   }
 }

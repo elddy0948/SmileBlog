@@ -2,6 +2,19 @@ import Foundation
 
 final class NetworkUsersRepository: UsersRepository {
   func create(user: User, completion: @escaping (Result<User, Error>) -> Void) {
+    let userToCreate = UserRequestDTO(name: user.name, username: user.username)
+    NetworkService.create(
+      encodableData: userToCreate,
+      endPoint: "/api/users/",
+      completion: { (result: Result<UserResponseDTO, NetworkError>) in
+        switch result {
+        case .success(let userResponse):
+          let user = userResponse.toDomain()
+          completion(.success(user))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+      })
   }
   
   func fetchUser(userID: String, completion: @escaping (Result<User, Error>) -> Void) {

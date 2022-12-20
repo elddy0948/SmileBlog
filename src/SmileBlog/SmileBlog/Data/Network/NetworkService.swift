@@ -7,6 +7,7 @@ public enum NetworkError: Error {
   case invalidStatusCode
   case invalidData
   case failedDecoding
+  case failedEncoding
 }
 
 final class NetworkService {
@@ -50,6 +51,62 @@ final class NetworkService {
         return
       }
     })
+    
+    task.resume()
+  }
+  
+  static func create<E: Encodable, D: Decodable>(
+    requestType: E.Type = E.self,
+    responseType: D.Type = D.self,
+    encodableData: E,
+    endPoint: String,
+    completion: @escaping (Result<D, NetworkError>) -> Void
+  ) {
+    guard let url = URL(string: baseURL + endPoint) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    do {
+      let encodedData = try JSONEncoder().encode(encodableData)
+      request.httpBody = encodedData
+    } catch {
+      completion(.failure(.failedEncoding))
+    }
+    
+    let task = URLSession.shared.dataTask(
+      with: request,
+      completionHandler: { data, response, error in
+        if let _ = error {
+          completion(.failure(.invalidRequest))
+          return
+        }
+        
+        guard let response = response as? HTTPURLResponse,
+              (200 ..< 300) ~= response.statusCode else {
+          print(response)
+          completion(.failure(.invalidStatusCode))
+          return
+        }
+        
+        guard let data = data else {
+          completion(.failure(.invalidData))
+          return
+        }
+        
+        do {
+          let decodedData = try JSONDecoder().decode(D.self, from: data)
+          completion(.success(decodedData))
+          return
+        } catch {
+          completion(.failure(.failedDecoding))
+          return
+        }
+      })
     
     task.resume()
   }

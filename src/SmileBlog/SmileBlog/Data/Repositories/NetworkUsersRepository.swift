@@ -2,7 +2,7 @@ import Foundation
 
 final class NetworkUsersRepository: UsersRepository {
   func create(user: User, completion: @escaping (Result<User, Error>) -> Void) {
-    let userToCreate = UserRequestDTO(name: user.name, username: user.username)
+    let userToCreate = UserRequestDTO(username: user.username)
     NetworkService.create(
       encodableData: userToCreate,
       endPoint: "/api/users/",

@@ -7,9 +7,6 @@ final class User: Model, Content {
   @ID
   var id: UUID?
   
-  @Field(key: "name")
-  var name: String
-  
   @Field(key: "username")
   var username: String
   
@@ -18,8 +15,7 @@ final class User: Model, Content {
   
   init() {}
   
-  init(id: UUID? = nil, name: String, username: String) {
-    self.name = name
+  init(id: UUID? = nil, username: String) {
     self.username = username
   }
 }

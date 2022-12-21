@@ -1,4 +1,5 @@
 import Vapor
+import Fluent
 
 struct UsersController: RouteCollection {
   func boot(routes: RoutesBuilder) throws {
@@ -10,6 +11,8 @@ struct UsersController: RouteCollection {
     usersRoute.get(":userID", use: getHandler(_:))
     
     usersRoute.get(":userID", "posts", use: getPostsHandler(_:))
+    
+    usersRoute.get("search", use: searchHandler(_:))
   }
   
   //MARK: - Create
@@ -36,5 +39,16 @@ struct UsersController: RouteCollection {
       .flatMap({ user in
         user.$posts.get(on: req.db)
       })
+  }
+  
+  func searchHandler(_ req: Request) throws -> EventLoopFuture<User> {
+    guard let searchTerm = req.query[String.self, at: "username"] else {
+      throw Abort(.badRequest)
+    }
+    
+    return User.query(on: req.db)
+      .filter(\.$username == searchTerm)
+      .first()
+      .unwrap(or: Abort(.notFound))
   }
 }

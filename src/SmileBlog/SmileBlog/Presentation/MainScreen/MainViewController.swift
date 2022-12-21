@@ -20,6 +20,12 @@ final class MainViewController: UIViewController {
   private let warningLabel = UILabel()
   private let enterButton = SBButton(title: "Enter!")
   
+  private let repository = NetworkUsersRepository()
+  private lazy var usecase: DefaultUsersUseCase = {
+    let usecase = DefaultUsersUseCase(usersRepository: repository)
+    return usecase
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
@@ -62,6 +68,39 @@ extension MainViewController {
       warningLabel.text = "Type username!"
     } else {
       warningLabel.text = ""
+      guard let username = usernameTextField.text else { return }
+      usecase.searchUser(username: username, completion: { [weak self] result in
+        switch result {
+        case .success(let user):
+          self?.enterHome(with: user)
+        case .failure(_):
+          self?.createUser(with: username)
+        }
+      })
+    }
+  }
+  
+  private func createUser(with username: String) {
+    let userToCreate = User(id: nil, username: username)
+    usecase.create(
+      user: userToCreate,
+      completion: { [weak self] result in
+        switch result {
+        case .success(let user):
+          self?.enterHome(with: user)
+        case .failure(_):
+          DispatchQueue.main.async { [weak self] in
+            self?.warningLabel.text = "생성에 실패 했습니다!"
+          }
+        }
+      })
+  }
+  
+  private func enterHome(with user: User) {
+    DispatchQueue.main.async { [weak self] in
+      self?.navigationController?.pushViewController(
+        HomeViewController(user: user), animated: false
+      )
     }
   }
 }

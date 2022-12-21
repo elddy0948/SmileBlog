@@ -8,6 +8,7 @@ public enum NetworkError: Error {
   case invalidData
   case failedDecoding
   case failedEncoding
+  case failedToCreateURL
 }
 
 final class NetworkService {
@@ -88,7 +89,6 @@ final class NetworkService {
         
         guard let response = response as? HTTPURLResponse,
               (200 ..< 300) ~= response.statusCode else {
-          print(response)
           completion(.failure(.invalidStatusCode))
           return
         }
@@ -100,6 +100,62 @@ final class NetworkService {
         
         do {
           let decodedData = try JSONDecoder().decode(D.self, from: data)
+          completion(.success(decodedData))
+          return
+        } catch {
+          completion(.failure(.failedDecoding))
+          return
+        }
+      })
+    
+    task.resume()
+  }
+  
+  static func search<T: Decodable>(
+    of type: T.Type = T.self,
+    endPoint: String,
+    field: String,
+    key: String,
+    completion: @escaping (Result<T, NetworkError>) -> Void
+  ) {
+    guard var urlComponents = URLComponents(string: baseURL + endPoint) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+    
+    urlComponents.queryItems = [
+      URLQueryItem(name: field, value: key)
+    ]
+    
+    guard let url = urlComponents.url else {
+      completion(.failure(.failedToCreateURL))
+      return
+    }
+  
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    
+    let task = URLSession.shared.dataTask(
+      with: request,
+      completionHandler: { data, response, error in
+        if let _ = error {
+          completion(.failure(.invalidRequest))
+          return
+        }
+        
+        guard let response = response as? HTTPURLResponse,
+              (200 ..< 300) ~= response.statusCode else {
+          completion(.failure(.invalidStatusCode))
+          return
+        }
+        
+        guard let data = data else {
+          completion(.failure(.invalidData))
+          return
+        }
+        
+        do {
+          let decodedData = try JSONDecoder().decode(T.self, from: data)
           completion(.success(decodedData))
           return
         } catch {

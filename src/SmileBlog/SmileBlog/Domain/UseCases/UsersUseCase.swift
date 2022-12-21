@@ -50,4 +50,15 @@ final class DefaultUsersUseCase {
       }
     })
   }
+  
+  func searchUser(username: String, completion: @escaping (Result<User, Error>) -> Void) {
+    self.usersRepository.searchUser(username: username, completion: { result in
+      switch result {
+      case .success(let user):
+        completion(.success(user))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    })
+  }
 }

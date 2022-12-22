@@ -48,6 +48,9 @@ final class HomeViewController: UIViewController {
 extension HomeViewController {
   private func setupViews() {
     view.backgroundColor = .systemBackground
+    navigationController?.navigationBar.prefersLargeTitles = true
+    title = "Home"
+    
     homeTableView.backgroundColor = .systemBackground
     
     homeTableView.register(

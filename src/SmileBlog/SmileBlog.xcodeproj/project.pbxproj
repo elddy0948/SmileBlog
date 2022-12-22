@@ -76,8 +76,8 @@
 		B42D911129501655009E51F3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				B4DC157A29517B2000B8FFEB /* Repositories */,
 				B42D911229501657009E51F3 /* Network */,
+				B4DC157A29517B2000B8FFEB /* Repositories */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -169,10 +169,10 @@
 		B4DC15862951900A00B8FFEB /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B459F74C29542F8900BB3AF2 /* PostScreen */,
 				B4DC158C2951950900B8FFEB /* Common */,
 				B4DC158A295190AD00B8FFEB /* HomeScreen */,
 				B4DC15872951901C00B8FFEB /* MainScreen */,
+				B459F74C29542F8900BB3AF2 /* PostScreen */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -224,9 +224,9 @@
 		B4FF6162294C47EB003A2787 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				B4FF615B294C355E003A2787 /* Entities */,
 				B4FF6166294C48DD003A2787 /* Repositories */,
 				B4FF6163294C4861003A2787 /* UseCases */,
-				B4FF615B294C355E003A2787 /* Entities */,
 			);
 			path = Domain;
 			sourceTree = "<group>";

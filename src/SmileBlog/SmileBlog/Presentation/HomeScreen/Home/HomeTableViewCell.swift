@@ -34,6 +34,8 @@ final class HomeTableViewCell: UITableViewCell {
   }
   
   private func setupViews() {
+    selectionStyle = .none
+    
     stackView.axis = .vertical
     stackView.distribution = .fillEqually
     stackView.spacing = 8

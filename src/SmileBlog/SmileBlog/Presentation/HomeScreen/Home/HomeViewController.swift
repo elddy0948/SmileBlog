@@ -2,6 +2,8 @@ import UIKit
 
 final class HomeViewController: UIViewController {
   private let homeTableView = UITableView()
+  private let addButton = UIButton()
+  
   private let user: User?
   private var posts: [Post]  = [] {
     didSet {
@@ -43,6 +45,11 @@ final class HomeViewController: UIViewController {
       }
     })
   }
+  
+  @objc func addButtonTapped(_ sender: UIButton) {
+    let createPostViewController = CreatePostViewController()
+    self.present(createPostViewController, animated: true)
+  }
 }
 
 extension HomeViewController {
@@ -59,16 +66,37 @@ extension HomeViewController {
     
     homeTableView.delegate = self
     homeTableView.dataSource = self
+    
+    addButton.tintColor = .label
+    addButton.backgroundColor = .systemGreen
+    addButton.layer.cornerRadius = 20
+    addButton.layer.masksToBounds = true
+    addButton.setTitle("+", for: .normal)
+    addButton.addTarget(
+      self, action: #selector(addButtonTapped(_:)),
+      for: .touchUpInside)
   }
   
   private func layout() {
     view.addSubview(homeTableView)
+    view.addSubview(addButton)
+    
     homeTableView.translatesAutoresizingMaskIntoConstraints = false
+    addButton.translatesAutoresizingMaskIntoConstraints = false
+    
     NSLayoutConstraint.activate([
       homeTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       homeTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       homeTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       homeTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+      addButton.heightAnchor.constraint(equalToConstant: 40),
+      addButton.widthAnchor.constraint(equalToConstant: 40),
+      view.safeAreaLayoutGuide.trailingAnchor.constraint(
+        equalToSystemSpacingAfter: addButton.trailingAnchor,
+        multiplier: 1),
+      view.safeAreaLayoutGuide.bottomAnchor.constraint(
+        equalToSystemSpacingBelow: addButton.bottomAnchor,
+        multiplier: 2),
     ])
   }
 }
@@ -86,6 +114,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     let post = posts[indexPath.row]
     cell.configureCellData(with: post)
+    cell.contentView.setNeedsDisplay()
     return cell
   }
 }

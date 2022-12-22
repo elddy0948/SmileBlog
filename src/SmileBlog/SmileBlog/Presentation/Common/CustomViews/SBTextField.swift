@@ -27,5 +27,7 @@ class SBTextField: UITextField {
     layer.borderWidth = 1
     layer.borderColor = UIColor.black.cgColor
     keyboardType = .default
+    autocorrectionType = .no
+    autocapitalizationType = .none
   }
 }

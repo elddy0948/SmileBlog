@@ -29,6 +29,7 @@ final class HomeTabBarController: UITabBarController {
     guard let user = user else { return }
     let homeVC = HomeViewController(user: user)
     let homeNavigationController = UINavigationController(rootViewController: homeVC)
+    homeNavigationController.navigationBar.tintColor = .label
     homeNavigationController.tabBarItem.title = "Home"
     homeNavigationController.tabBarItem.image = UIImage(systemName: "house")
     

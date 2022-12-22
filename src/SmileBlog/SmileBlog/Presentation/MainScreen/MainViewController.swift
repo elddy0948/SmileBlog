@@ -49,6 +49,8 @@ extension MainViewController {
     
     usernameTextField.translatesAutoresizingMaskIntoConstraints = false
     usernameTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    enterButton.translatesAutoresizingMaskIntoConstraints = false
+    enterButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
     mainStackView.addArrangedSubview(logoImageView)
     mainStackView.addArrangedSubview(usernameTextField)

@@ -12,6 +12,7 @@
 		B42D911929501B35009E51F3 /* UserResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */; };
 		B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */; };
 		B459F7422952D59500BB3AF2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F7412952D59500BB3AF2 /* HomeViewController.swift */; };
+		B459F74429536D8700BB3AF2 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */; };
 		B4B1669B2939D39600971309 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1669A2939D39600971309 /* AppDelegate.swift */; };
 		B4B1669D2939D39600971309 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B1669C2939D39600971309 /* SceneDelegate.swift */; };
 		B4B166A42939D39700971309 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4B166A32939D39700971309 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B459F7412952D59500BB3AF2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		B4B166972939D39600971309 /* SmileBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4B1669A2939D39600971309 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4B1669C2939D39600971309 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B459F7412952D59500BB3AF2 /* HomeViewController.swift */,
+				B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				B4DC15812951818500B8FFEB /* PostsUseCase.swift in Sources */,
 				B4DC15902951971E00B8FFEB /* SBButton.swift in Sources */,
 				B459F7422952D59500BB3AF2 /* HomeViewController.swift in Sources */,
+				B459F74429536D8700BB3AF2 /* HomeTableViewCell.swift in Sources */,
 				B4DC1585295184EA00B8FFEB /* NetworkPostsRepository.swift in Sources */,
 				B42D9114295016AB009E51F3 /* NetworkService.swift in Sources */,
 				B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */,

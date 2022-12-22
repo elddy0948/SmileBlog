@@ -3,6 +3,19 @@ import UIKit
 final class HomeViewController: UIViewController {
   private let homeTableView = UITableView()
   private let user: User?
+  private var posts: [Post]  = [] {
+    didSet {
+      DispatchQueue.main.async { [weak self] in
+        self?.homeTableView.reloadData()
+      }
+    }
+  }
+  
+  private let postsRepository = NetworkPostsRepository()
+  private lazy var postsUsecase: DefaultPostsUseCase = {
+    let usecase = DefaultPostsUseCase(postsRepository: postsRepository)
+    return usecase
+  }()
   
   init(user: User) {
     self.user = user
@@ -17,6 +30,18 @@ final class HomeViewController: UIViewController {
     super.viewDidLoad()
     setupViews()
     layout()
+    fetchPosts()
+  }
+  
+  private func fetchPosts() {
+    postsUsecase.fetchPosts(completion: { result in
+      switch result {
+      case .success(let posts):
+        self.posts = posts
+      case .failure(_):
+        return
+      }
+    })
   }
 }
 
@@ -24,6 +49,11 @@ extension HomeViewController {
   private func setupViews() {
     view.backgroundColor = .systemBackground
     homeTableView.backgroundColor = .systemBackground
+    
+    homeTableView.register(
+      HomeTableViewCell.self,
+      forCellReuseIdentifier: HomeTableViewCell.reuseIdentifier)
+    
     homeTableView.delegate = self
     homeTableView.dataSource = self
   }
@@ -42,11 +72,18 @@ extension HomeViewController {
 
 extension HomeViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return posts.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    guard let cell = tableView.dequeueReusableCell(
+      withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath
+    ) as? HomeTableViewCell else {
+      return UITableViewCell()
+    }
+    let post = posts[indexPath.row]
+    cell.configureCellData(with: post)
+    return cell
   }
 }
 

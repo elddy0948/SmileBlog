@@ -98,9 +98,7 @@ extension MainViewController {
   
   private func enterHome(with user: User) {
     DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.pushViewController(
-        HomeViewController(user: user), animated: false
-      )
+      self?.view.window?.rootViewController = HomeTabBarController(user: user)
     }
   }
 }

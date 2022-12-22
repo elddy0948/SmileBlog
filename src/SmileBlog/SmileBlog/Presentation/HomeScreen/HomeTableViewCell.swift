@@ -18,6 +18,13 @@ final class HomeTableViewCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    writerLabel.text = nil
+    titleLabel.text = nil
+    createdAtLabel.text = nil
+  }
+  
   func configureCellData(with post: Post) {
     DispatchQueue.main.async { [weak self] in
       self?.writerLabel.text = post.writer
@@ -28,20 +35,26 @@ final class HomeTableViewCell: UITableViewCell {
   
   private func setupViews() {
     stackView.axis = .vertical
-    stackView.distribution = .fill
+    stackView.distribution = .fillEqually
     stackView.spacing = 8
     
     writerLabel.textColor = .secondaryLabel
     writerLabel.textAlignment = .left
     writerLabel.font = UIFont.preferredFont(forTextStyle: .body)
+    writerLabel.numberOfLines = 1
+    writerLabel.text = "writer"
     
     titleLabel.textColor = .label
     titleLabel.textAlignment = .left
     titleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+    titleLabel.numberOfLines = 0
+    titleLabel.text = "title"
     
     createdAtLabel.textColor = .label
     createdAtLabel.textAlignment = .left
     createdAtLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+    createdAtLabel.numberOfLines = 1
+    createdAtLabel.text = "created"
   }
   
   private func layout() {
@@ -60,7 +73,7 @@ final class HomeTableViewCell: UITableViewCell {
       stackView.leadingAnchor.constraint(
         equalToSystemSpacingAfter: contentView.leadingAnchor,
         multiplier: 1),
-      stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      contentView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
       contentView.bottomAnchor.constraint(
         equalToSystemSpacingBelow: stackView.bottomAnchor,
         multiplier: 1),

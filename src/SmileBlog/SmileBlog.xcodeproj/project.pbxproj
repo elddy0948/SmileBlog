@@ -99,6 +99,23 @@
 			path = DataMapping;
 			sourceTree = "<group>";
 		};
+		B459F74A29542D4200BB3AF2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B459F7412952D59500BB3AF2 /* HomeViewController.swift */,
+				B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B459F74B29542D4500BB3AF2 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				B459F74829541F2800BB3AF2 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		B4B1668E2939D39600971309 = {
 			isa = PBXGroup;
 			children = (
@@ -160,10 +177,9 @@
 		B4DC158A295190AD00B8FFEB /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
-				B459F7412952D59500BB3AF2 /* HomeViewController.swift */,
-				B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */,
+				B459F74A29542D4200BB3AF2 /* Home */,
 				B459F745295419EC00BB3AF2 /* HomeTabBarController.swift */,
-				B459F74829541F2800BB3AF2 /* MyPageViewController.swift */,
+				B459F74B29542D4500BB3AF2 /* MyPage */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";

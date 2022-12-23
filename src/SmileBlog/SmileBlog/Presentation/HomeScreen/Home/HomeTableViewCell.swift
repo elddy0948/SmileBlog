@@ -26,11 +26,9 @@ final class HomeTableViewCell: UITableViewCell {
   }
   
   func configureCellData(with post: Post) {
-    DispatchQueue.main.async { [weak self] in
-      self?.writerLabel.text = post.writer
-      self?.titleLabel.text = post.title
-      self?.createdAtLabel.text = "created at : " + String(describing: post.createdAt)
-    }
+    writerLabel.text = post.writer
+    titleLabel.text = post.title
+    createdAtLabel.text = "created at : " + String(describing: post.createdAt)
   }
   
   private func setupViews() {

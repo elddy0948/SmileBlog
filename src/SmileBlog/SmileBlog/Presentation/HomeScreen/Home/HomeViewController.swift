@@ -32,14 +32,18 @@ final class HomeViewController: UIViewController {
     super.viewDidLoad()
     setupViews()
     layout()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     fetchPosts()
   }
   
   private func fetchPosts() {
-    postsUsecase.fetchPosts(completion: { result in
+    postsUsecase.fetchPosts(completion: { [weak self] result in
       switch result {
       case .success(let posts):
-        self.posts = posts
+        self?.posts = posts
       case .failure(_):
         return
       }
@@ -47,7 +51,8 @@ final class HomeViewController: UIViewController {
   }
   
   @objc func addButtonTapped(_ sender: UIButton) {
-    let createPostViewController = CreatePostViewController()
+    guard let user = user else { return }
+    let createPostViewController = CreatePostViewController(user: user)
     self.present(createPostViewController, animated: true)
   }
 }

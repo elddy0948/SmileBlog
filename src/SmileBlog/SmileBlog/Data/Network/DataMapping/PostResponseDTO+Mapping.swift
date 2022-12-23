@@ -5,9 +5,13 @@ struct PostResponseDTO: Decodable {
   let title: String
   let body: String
   let writer: String
-  let createdAt: Date?
-  let editedAt: Date?
-  let user: [String: UUID?]
+  let createdAt: String?
+  let editedAt: String?
+  let user: PostUser
+}
+
+struct PostUser: Decodable {
+  let id: UUID?
 }
 
 extension PostResponseDTO {
@@ -19,7 +23,7 @@ extension PostResponseDTO {
       writer: self.writer,
       editedAt: self.editedAt,
       createdAt: self.createdAt,
-      user: self.user
+      user: self.user.id
     )
   }
 }

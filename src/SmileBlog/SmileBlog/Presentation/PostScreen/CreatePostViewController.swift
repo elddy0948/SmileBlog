@@ -39,14 +39,88 @@ final class CreatePostViewController: UIViewController {
     return textView
   }()
   
+  private let repository = NetworkPostsRepository()
+  private lazy var usecase: DefaultPostsUseCase = {
+    let usecase = DefaultPostsUseCase(postsRepository: repository)
+    return usecase
+  }()
+  private let user: User?
+  
+  init(user: User) {
+    self.user = user
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
+    setupViews()
     layout()
+  }
+  
+  @objc func didTappedCancel() {
+    self.dismiss(animated: true)
+  }
+  
+  @objc func didTappedSave() {
+    guard let title = titleTextField.text,
+          let body = bodyTextView.text else {
+      self.dismiss(animated: true)
+      return
+    }
+    
+    if title == "" || body == "" {
+      self.dismiss(animated: true)
+      return
+    }
+    
+    guard let user = user else { return }
+    
+    savePost(with: user, title: title, body: body)
+  }
+  
+  private func savePost(with user: User, title: String, body: String) {
+    let postToCreate = Post(
+      id: nil,
+      title: title,
+      body: body,
+      writer: user.username,
+      editedAt: "\(Date())",
+      createdAt: "\(Date())",
+      user: user.id
+    )
+    
+    usecase.create(
+      post: postToCreate,
+      completion: { [weak self] result in
+        switch result {
+        case .success(_):
+          DispatchQueue.main.async {
+            self?.dismiss(animated: true)
+          }
+        case .failure(let error):
+          print(error)
+        }
+      })
   }
 }
 
 extension CreatePostViewController {
+  private func setupViews() {
+    cancelButton.addTarget(
+      self,
+      action: #selector(didTappedCancel),
+      for: .touchUpInside)
+    saveButton.addTarget(
+      self,
+      action: #selector(didTappedSave),
+      for: .touchUpInside)
+  }
+  
   private func layout() {
     let safeArea = view.safeAreaLayoutGuide
     

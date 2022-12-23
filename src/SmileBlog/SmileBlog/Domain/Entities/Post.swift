@@ -5,7 +5,7 @@ struct Post {
   let title: String
   let body: String
   let writer: String
-  let editedAt: Date?
-  let createdAt: Date?
-  let user: [String: UUID?]
+  let editedAt: String?
+  let createdAt: String?
+  let user: UUID?
 }

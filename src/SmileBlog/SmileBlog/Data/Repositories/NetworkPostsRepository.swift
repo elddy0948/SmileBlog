@@ -2,6 +2,27 @@ import Foundation
 
 final class NetworkPostsRepository: PostsRepository {
   func create(post: Post, completion: @escaping (Result<Post, Error>) -> Void) {
+    let postRequest = PostRequestDTO(
+      title: post.title,
+      body: post.body,
+      writer: post.writer,
+      userID: post.user
+    )
+    
+    NetworkService.create(
+      encodableData: postRequest,
+      endPoint: "/api/posts",
+      completion: { (result: Result<PostResponseDTO, NetworkError>) in
+        switch result {
+        case .success(let postResponse):
+          let post = postResponse.toDomain()
+          completion(.success(post))
+          return
+        case .failure(let error):
+          completion(.failure(error))
+          return
+        }
+      })
   }
   
   func fetchPost(postID: String, completion: @escaping (Result<Post, Error>) -> Void) {

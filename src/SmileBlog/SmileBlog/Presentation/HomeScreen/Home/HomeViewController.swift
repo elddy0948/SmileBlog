@@ -127,8 +127,9 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let post = posts[indexPath.row]
-    let postDetailViewController = PostDetailViewController()
-    postDetailViewController.configurePost(post)
+    let postDetailViewController = PostDetailViewController(
+      post: post, type: .none
+    )
     navigationController?.pushViewController(postDetailViewController, animated: true)
   }
   

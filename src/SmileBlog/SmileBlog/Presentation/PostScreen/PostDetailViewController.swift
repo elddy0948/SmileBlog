@@ -1,22 +1,46 @@
 import UIKit
 
 final class PostDetailViewController: UIViewController {
+  enum PostDetailType {
+    case editable
+    case none
+  }
+  
   private let writerLabel = UILabel()
   private let createdAtLabel = UILabel()
   private let titleLabel = UILabel()
   private let bodyTextView = UITextView()
   
+  private var post: Post?
+  private var type: PostDetailType
+  
+  init(post: Post, type: PostDetailType) {
+    self.post = post
+    self.type = type
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupViews()
     layout()
+    configurePost(post)
   }
   
-  func configurePost(_ post: Post) {
+  private func configurePost(_ post: Post?) {
+    guard let post = post else { return }
     writerLabel.text = post.writer
     createdAtLabel.text = String(describing: post.createdAt)
     titleLabel.text = post.title
     bodyTextView.text = post.body
+  }
+  
+  @objc func didTappedEditButton(_ sender: UIBarButtonItem) {
+    
   }
   
   private func setupViews() {
@@ -36,6 +60,14 @@ final class PostDetailViewController: UIViewController {
     bodyTextView.textColor = .label
     bodyTextView.font = UIFont.preferredFont(forTextStyle: .body)
     bodyTextView.isEditable = false
+    
+    if type == .editable {
+      let editBarButton = UIBarButtonItem(
+        barButtonSystemItem: .edit,
+        target: self,
+        action: #selector(didTappedEditButton(_:)))
+      navigationItem.rightBarButtonItems = [editBarButton]
+    }
   }
   
   private func layout() {
@@ -50,9 +82,12 @@ final class PostDetailViewController: UIViewController {
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     bodyTextView.translatesAutoresizingMaskIntoConstraints = false
     
-    writerLabel.setContentHuggingPriority(.defaultHigh - 2, for: .vertical)
-    createdAtLabel.setContentHuggingPriority(.defaultHigh - 1, for: .vertical)
-    titleLabel.setContentHuggingPriority(.defaultHigh + 1, for: .vertical)
+    writerLabel.setContentHuggingPriority(
+      .defaultHigh - 2, for: .vertical)
+    createdAtLabel.setContentHuggingPriority(
+      .defaultHigh - 1, for: .vertical)
+    titleLabel.setContentHuggingPriority(
+      .defaultHigh + 1, for: .vertical)
     bodyTextView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     
     NSLayoutConstraint.activate([

@@ -31,15 +31,20 @@ final class HomeTabBarController: UITabBarController {
     let homeNavigationController = UINavigationController(rootViewController: homeVC)
     homeNavigationController.navigationBar.tintColor = .label
     homeNavigationController.tabBarItem.title = "Home"
-    homeNavigationController.tabBarItem.image = UIImage(systemName: "house")
+    homeNavigationController.tabBarItem.image = UIImage(
+      systemName: "house")
     
-    let mypageViewController = MyPageViewController()
-    mypageViewController.tabBarItem.title = "MyPage"
-    mypageViewController.tabBarItem.image = UIImage(systemName: "person")
+    let mypageViewController = MyPageViewController(user: user)
+    let mypageNavigationController = UINavigationController(
+      rootViewController: mypageViewController)
+
+    mypageNavigationController.tabBarItem.title = "MyPage"
+    mypageNavigationController.tabBarItem.image = UIImage(
+      systemName: "person")
     
     viewControllers = [
       homeNavigationController,
-      mypageViewController
+      mypageNavigationController
     ]
   }
 }

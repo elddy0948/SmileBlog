@@ -1,7 +1,7 @@
 import UIKit
 
-final class HomeTableViewCell: UITableViewCell {
-  static let reuseIdentifier = String(describing: HomeTableViewCell.self)
+final class PostTableViewCell: UITableViewCell {
+  static let reuseIdentifier = String(describing: PostTableViewCell.self)
   
   private let stackView = UIStackView()
   private let writerLabel = UILabel()

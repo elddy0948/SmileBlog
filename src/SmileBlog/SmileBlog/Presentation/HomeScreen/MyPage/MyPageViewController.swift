@@ -12,6 +12,7 @@ final class MyPageViewController: UIViewController {
     )
     return usecase
   }()
+  
   private var posts: [Post] = [] {
     didSet {
       DispatchQueue.main.async { [weak self] in
@@ -65,8 +66,8 @@ extension MyPageViewController {
   private func setupViews() {
     myPostTableView.backgroundColor = .systemBackground
     myPostTableView.register(
-      HomeTableViewCell.self,
-      forCellReuseIdentifier: HomeTableViewCell.reuseIdentifier
+      PostTableViewCell.self,
+      forCellReuseIdentifier: PostTableViewCell.reuseIdentifier
     )
     myPostTableView.delegate = self
     myPostTableView.dataSource = self
@@ -99,8 +100,8 @@ extension MyPageViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(
-      withIdentifier: HomeTableViewCell.reuseIdentifier,
-      for: indexPath) as? HomeTableViewCell else {
+      withIdentifier: PostTableViewCell.reuseIdentifier,
+      for: indexPath) as? PostTableViewCell else {
       return UITableViewCell()
     }
     let post = posts[indexPath.row]

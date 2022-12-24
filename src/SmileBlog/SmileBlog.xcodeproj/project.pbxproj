@@ -12,7 +12,7 @@
 		B42D911929501B35009E51F3 /* UserResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */; };
 		B42D911B29501B66009E51F3 /* PostResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */; };
 		B459F7422952D59500BB3AF2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F7412952D59500BB3AF2 /* HomeViewController.swift */; };
-		B459F74429536D8700BB3AF2 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */; };
+		B459F74429536D8700BB3AF2 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F74329536D8700BB3AF2 /* PostTableViewCell.swift */; };
 		B459F746295419EC00BB3AF2 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F745295419EC00BB3AF2 /* HomeTabBarController.swift */; };
 		B459F74929541F2800BB3AF2 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F74829541F2800BB3AF2 /* MyPageViewController.swift */; };
 		B459F74E29542F9700BB3AF2 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B459F74D29542F9700BB3AF2 /* PostDetailViewController.swift */; };
@@ -41,7 +41,7 @@
 		B42D911829501B35009E51F3 /* UserResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B42D911A29501B66009E51F3 /* PostResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		B459F7412952D59500BB3AF2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		B459F74329536D8700BB3AF2 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		B459F745295419EC00BB3AF2 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B459F74829541F2800BB3AF2 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		B459F74D29542F9700BB3AF2 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -110,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				B459F7412952D59500BB3AF2 /* HomeViewController.swift */,
-				B459F74329536D8700BB3AF2 /* HomeTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -213,6 +212,7 @@
 		B4DC158C2951950900B8FFEB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B459F74329536D8700BB3AF2 /* PostTableViewCell.swift */,
 				B4DC158B2951950100B8FFEB /* CustomViews */,
 			);
 			path = Common;
@@ -340,7 +340,7 @@
 				B4DC15812951818500B8FFEB /* PostsUseCase.swift in Sources */,
 				B4DC15902951971E00B8FFEB /* SBButton.swift in Sources */,
 				B459F7422952D59500BB3AF2 /* HomeViewController.swift in Sources */,
-				B459F74429536D8700BB3AF2 /* HomeTableViewCell.swift in Sources */,
+				B459F74429536D8700BB3AF2 /* PostTableViewCell.swift in Sources */,
 				B459F7502954C9FD00BB3AF2 /* CreatePostViewController.swift in Sources */,
 				B4DC1585295184EA00B8FFEB /* NetworkPostsRepository.swift in Sources */,
 				B42D9114295016AB009E51F3 /* NetworkService.swift in Sources */,

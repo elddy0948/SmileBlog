@@ -66,8 +66,8 @@ extension HomeViewController {
     homeTableView.backgroundColor = .systemBackground
     
     homeTableView.register(
-      HomeTableViewCell.self,
-      forCellReuseIdentifier: HomeTableViewCell.reuseIdentifier)
+      PostTableViewCell.self,
+      forCellReuseIdentifier: PostTableViewCell.reuseIdentifier)
     
     homeTableView.delegate = self
     homeTableView.dataSource = self
@@ -113,8 +113,8 @@ extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(
-      withIdentifier: HomeTableViewCell.reuseIdentifier, for: indexPath
-    ) as? HomeTableViewCell else {
+      withIdentifier: PostTableViewCell.reuseIdentifier, for: indexPath
+    ) as? PostTableViewCell else {
       return UITableViewCell()
     }
     let post = posts[indexPath.row]

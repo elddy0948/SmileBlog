@@ -14,6 +14,12 @@ final class PostDetailViewController: UIViewController {
   private var post: Post?
   private var type: PostDetailType
   
+  private let repository = NetworkPostsRepository()
+  private lazy var usecase: DefaultPostsUseCase = {
+    let usecase = DefaultPostsUseCase(postsRepository: repository)
+    return usecase
+  }()
+  
   init(post: Post, type: PostDetailType) {
     self.post = post
     self.type = type
@@ -40,7 +46,66 @@ final class PostDetailViewController: UIViewController {
   }
   
   @objc func didTappedEditButton(_ sender: UIBarButtonItem) {
+    guard let post = post,
+          let postID = post.id else { return }
     
+    self.bodyTextView.isEditable = true
+    
+    let alertController = UIAlertController()
+    
+    let deleteAction = UIAlertAction(
+      title: "Delete",
+      style: .destructive,
+      handler: { [weak self] _ in
+        self?.usecase.deletePost(
+          postID: "\(postID)",
+          completion: { result in
+            switch result {
+            case .success(_):
+              self?.navigationController?.popViewController(
+                animated: true
+              )
+            case .failure(_):
+              return
+            }
+          })
+      }
+    )
+    
+    let postToEdit = Post(
+      id: post.id,
+      title: titleLabel.text ?? post.title,
+      body: bodyTextView.text,
+      writer: post.writer,
+      editedAt: String(describing: Date()),
+      createdAt: post.createdAt,
+      user: post.user
+    )
+    
+    let editAction = UIAlertAction(
+      title: "Edit",
+      style: .default,
+      handler: { [weak self] _ in
+        self?.bodyTextView.isEditable = false
+        self?.usecase.updatePost(
+          postID: "\(postID)",
+          updatedPost: postToEdit,
+          completion: { result in
+            switch result {
+            case .success(let post):
+              self?.post = post
+              self?.configurePost(post)
+              return
+            case .failure(_):
+              return
+            }
+          })
+      })
+    
+    alertController.addAction(deleteAction)
+    alertController.addAction(editAction)
+    
+    present(alertController, animated: true)
   }
   
   private func setupViews() {

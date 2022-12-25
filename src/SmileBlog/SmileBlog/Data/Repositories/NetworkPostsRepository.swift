@@ -73,7 +73,34 @@ final class NetworkPostsRepository: PostsRepository {
       })
   }
   
-  func updatePost(postID: String, updatedPost: Post, completion: @escaping (Result<Post, Error>) -> Void) {}
+  func updatePost(
+    postID: String,
+    updatedPost: Post,
+    completion: @escaping (Result<Post, Error>) -> Void
+  ) {
+    let postToUpdate = PostRequestDTO(
+      title: updatedPost.title,
+      body: updatedPost.body,
+      writer: updatedPost.writer,
+      userID: updatedPost.user
+    )
+    
+    NetworkService.update(
+      id: postID,
+      updateData: postToUpdate,
+      endPoint: "/api/posts/",
+      completion: { (result: Result<PostResponseDTO, NetworkError>) in
+        switch result {
+        case .success(let postResponse):
+          let post = postResponse.toDomain()
+          completion(.success(post))
+          return
+        case .failure(let error):
+          completion(.failure(error))
+          return
+        }
+      })
+  }
   
   func deletePost(
     postID: String,

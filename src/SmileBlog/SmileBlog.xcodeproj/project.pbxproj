@@ -29,6 +29,7 @@
 		B4DC15892951902300B8FFEB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC15882951902300B8FFEB /* MainViewController.swift */; };
 		B4DC158E2951951500B8FFEB /* SBTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC158D2951951500B8FFEB /* SBTextField.swift */; };
 		B4DC15902951971E00B8FFEB /* SBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4DC158F2951971E00B8FFEB /* SBButton.swift */; };
+		B4F62478295848ED00BCD2A0 /* EditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F62477295848ED00BCD2A0 /* EditPostViewController.swift */; };
 		B4FF615F294C36D4003A2787 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF615E294C36D4003A2787 /* User.swift */; };
 		B4FF6161294C370D003A2787 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF6160294C370D003A2787 /* Post.swift */; };
 		B4FF6165294C4879003A2787 /* UsersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FF6164294C4879003A2787 /* UsersUseCase.swift */; };
@@ -60,6 +61,7 @@
 		B4DC15882951902300B8FFEB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B4DC158D2951951500B8FFEB /* SBTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBTextField.swift; sourceTree = "<group>"; };
 		B4DC158F2951971E00B8FFEB /* SBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBButton.swift; sourceTree = "<group>"; };
+		B4F62477295848ED00BCD2A0 /* EditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostViewController.swift; sourceTree = "<group>"; };
 		B4FF615E294C36D4003A2787 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B4FF6160294C370D003A2787 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B4FF6164294C4879003A2787 /* UsersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersUseCase.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				B459F74D29542F9700BB3AF2 /* PostDetailViewController.swift */,
 				B459F74F2954C9FD00BB3AF2 /* CreatePostViewController.swift */,
+				B4F62477295848ED00BCD2A0 /* EditPostViewController.swift */,
 			);
 			path = PostScreen;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				B42D911729501A39009E51F3 /* UserRequestDTO+Mapping.swift in Sources */,
 				B42D911929501B35009E51F3 /* UserResponseDTO+Mapping.swift in Sources */,
 				B459F746295419EC00BB3AF2 /* HomeTabBarController.swift in Sources */,
+				B4F62478295848ED00BCD2A0 /* EditPostViewController.swift in Sources */,
 				B4DC1583295181AA00B8FFEB /* PostsRepository.swift in Sources */,
 				B459F74929541F2800BB3AF2 /* MyPageViewController.swift in Sources */,
 				B4B1669B2939D39600971309 /* AppDelegate.swift in Sources */,

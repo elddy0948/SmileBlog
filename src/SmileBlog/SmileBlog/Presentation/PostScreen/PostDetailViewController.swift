@@ -74,34 +74,12 @@ final class PostDetailViewController: UIViewController {
       }
     )
     
-    let postToEdit = Post(
-      id: post.id,
-      title: titleLabel.text ?? post.title,
-      body: bodyTextView.text,
-      writer: post.writer,
-      editedAt: String(describing: Date()),
-      createdAt: post.createdAt,
-      user: post.user
-    )
-    
     let editAction = UIAlertAction(
       title: "Edit",
       style: .default,
       handler: { [weak self] _ in
-        self?.bodyTextView.isEditable = false
-        self?.usecase.updatePost(
-          postID: "\(postID)",
-          updatedPost: postToEdit,
-          completion: { result in
-            switch result {
-            case .success(let post):
-              self?.post = post
-              self?.configurePost(post)
-              return
-            case .failure(_):
-              return
-            }
-          })
+        let editVC = EditPostViewController(post: post)
+        self?.present(editVC, animated: true)
       })
     
     let cancelAction = UIAlertAction(

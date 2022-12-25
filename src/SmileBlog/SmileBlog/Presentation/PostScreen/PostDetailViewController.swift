@@ -104,8 +104,13 @@ final class PostDetailViewController: UIViewController {
           })
       })
     
+    let cancelAction = UIAlertAction(
+      title: "Cancel",
+      style: .cancel)
+    
     alertController.addAction(deleteAction)
     alertController.addAction(editAction)
+    alertController.addAction(cancelAction)
     
     present(alertController, animated: true)
   }

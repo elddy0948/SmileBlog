@@ -62,9 +62,11 @@ final class PostDetailViewController: UIViewController {
           completion: { result in
             switch result {
             case .success(_):
-              self?.navigationController?.popViewController(
-                animated: true
-              )
+              DispatchQueue.main.async {
+                self?.navigationController?.popViewController(
+                  animated: true
+                )
+              }
             case .failure(_):
               return
             }

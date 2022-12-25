@@ -75,5 +75,20 @@ final class NetworkPostsRepository: PostsRepository {
   
   func updatePost(postID: String, updatedPost: Post, completion: @escaping (Result<Post, Error>) -> Void) {}
   
-  func deletePost(postID: String, completion: @escaping (Result<Void, Error>) -> Void) {}
+  func deletePost(
+    postID: String,
+    completion: @escaping (Result<Void, Error>) -> Void
+  ) {
+    NetworkService.delete(
+      id: postID,
+      endPoint: "/api/posts/",
+      completion: { result in
+        switch result {
+        case .success(_):
+          completion(.success(()))
+        case .failure(let error):
+          completion(.failure(error))
+        }
+      })
+  }
 }

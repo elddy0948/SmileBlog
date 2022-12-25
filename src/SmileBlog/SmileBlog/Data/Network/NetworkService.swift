@@ -166,4 +166,36 @@ final class NetworkService {
     
     task.resume()
   }
+  
+  static func delete(
+    id: String,
+    endPoint: String,
+    completion: @escaping (Result<Void, NetworkError>) -> Void
+  ) {
+    guard let url = URL(string: baseURL + endPoint + id) else {
+      completion(.failure(.invalidURL))
+      return
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    
+    let task = URLSession.shared.dataTask(
+      with: request,
+      completionHandler: { _, response, error in
+        if let _ = error {
+          completion(.failure(.invalidRequest))
+          return
+        }
+        
+        guard let response = response as? HTTPURLResponse,
+              (200 ..< 300) ~= response.statusCode else {
+          completion(.failure(.invalidStatusCode))
+          return
+        }
+        completion(.success(()))
+      })
+    
+    task.resume()
+  }
 }
